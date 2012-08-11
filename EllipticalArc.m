@@ -59,23 +59,23 @@ double coeffs2Low[2][4][4] = {
 // while using quadratic Bézier curves for approximation
 // 1/4 <= b/a <= 1
 double coeffs2High[2][4][4] = {
-    {
+	{
 		{  0.0863805, -11.5595,     -2.68765,     0.181224    },
 		{  0.242856,   -1.81073,     1.56876,     1.68544     },
 		{  0.233337,   -0.455621,    0.222856,    0.403469    },
 		{  0.0612978,  -0.104879,    0.0446799,   0.00867312  }
-    }, {
+	}, {
 		{  0.028973,    6.68407,     0.171472,    0.0211706   },
 		{  0.0307674,  -0.0517815,   0.0216803,  -0.0749348   },
 		{ -0.0471179,   0.1288,     -0.0781702,   2.0         },
 		{ -0.0309683,   0.0531557,  -0.0227191,   0.0434511   }
-    }
+	}
 };
 
 // safety factor to convert the "best" error approximation
 // into a "max bound" error
 double safety2[4] = {
-    0.02, 2.83, 0.125, 0.01
+	0.02, 2.83, 0.125, 0.01
 };
 
 // coefficients for error estimation
@@ -87,12 +87,12 @@ double coeffs3Low[2][4][4] = {
 		{ -1.61486,     0.706564,    0.225945,    0.263682   },
 		{ -0.910164,    0.388383,    0.00551445,  0.00671814 },
 		{ -0.630184,    0.192402,    0.0098871,   0.0102527  }
-    }, {
+	}, {
 		{ -0.162211,    9.94329,     0.13723,     0.0124084  },
 		{ -0.253135,    0.00187735,  0.0230286,   0.01264    },
 		{ -0.0695069,  -0.0437594,   0.0120636,   0.0163087  },
 		{ -0.0328856,  -0.00926032, -0.00173573,  0.00527385 }
-    }
+	}
 };
 
 // coefficients for error estimation
@@ -104,18 +104,18 @@ double coeffs3High[2][4][4] = {
 		{  0.138148,   -1.45804,     1.32044,     1.38474    },
 		{  0.230903,   -0.450262,    0.219963,    0.414038   },
 		{  0.0590565,  -0.101062,    0.0430592,   0.0204699  }
-    }, {
+	}, {
 		{  0.0164649,   9.89394,     0.0919496,   0.00760802 },
 		{  0.0191603,  -0.0322058,   0.0134667,  -0.0825018  },
 		{  0.0156192,  -0.017535,    0.00326508, -0.228157   },
 		{ -0.0236752,   0.0405821,  -0.0173086,   0.176187   }
-    }
+	}
 };
 
 // safety factor to convert the "best" error approximation
 // into a "max bound" error
 double safety3[4] = {
-    0.001, 4.98, 0.207, 0.0067
+	0.001, 4.98, 0.207, 0.0067
 };
 
 @interface EllipticalArc()
@@ -315,35 +315,35 @@ double safety3[4] = {
 -(void)computeFocii
 {
 	double d  = sqrt(_a * _a - _b * _b);
-    double dx = d * _cosTheta;
-    double dy = d * _sinTheta;
+	double dx = d * _cosTheta;
+	double dy = d * _sinTheta;
 	
-    _xF1 = _cx - dx;
-    _yF1 = _cy - dy;
-    _xF2 = _cx + dx;
-    _yF2 = _cy + dy;
+	_xF1 = _cx - dx;
+	_yF1 = _cy - dy;
+	_xF2 = _cx + dx;
+	_yF2 = _cy + dy;
 }
 
 -(void)computeEndPoints
 {
 	// start point
-    double aCosEta1 = _a * cos(_eta1);
-    double bSinEta1 = _b * sin(_eta1);
-    _x1 = _cx + aCosEta1 * _cosTheta - bSinEta1 * _sinTheta;
-    _y1 = _cy + aCosEta1 * _sinTheta + bSinEta1 * _cosTheta;
+	double aCosEta1 = _a * cos(_eta1);
+	double bSinEta1 = _b * sin(_eta1);
+	_x1 = _cx + aCosEta1 * _cosTheta - bSinEta1 * _sinTheta;
+	_y1 = _cy + aCosEta1 * _sinTheta + bSinEta1 * _cosTheta;
 	
-    // end point
-    double aCosEta2 = _a * cos(_eta2);
-    double bSinEta2 = _b * sin(_eta2);
-    _x2 = _cx + aCosEta2 * _cosTheta - bSinEta2 * _sinTheta;
-    _y2 = _cy + aCosEta2 * _sinTheta + bSinEta2 * _cosTheta;
+	// end point
+	double aCosEta2 = _a * cos(_eta2);
+	double bSinEta2 = _b * sin(_eta2);
+	_x2 = _cx + aCosEta2 * _cosTheta - bSinEta2 * _sinTheta;
+	_y2 = _cy + aCosEta2 * _sinTheta + bSinEta2 * _cosTheta;
 }
 
 -(void)computeBounds
 {
 	double bOnA = _b / _a;
-    double etaXMin, etaXMax, etaYMin, etaYMax;
-    if (abs(_sinTheta) < 0.1) {
+	double etaXMin, etaXMax, etaYMin, etaYMax;
+	if (abs(_sinTheta) < 0.1) {
 		double tanTheta = _sinTheta / _cosTheta;
 		if (_cosTheta < 0) {
 			etaXMin = -atan(tanTheta * bOnA);
@@ -356,7 +356,7 @@ double safety3[4] = {
 			etaYMax = 0.5 * M_PI - atan(tanTheta / bOnA);
 			etaYMin = etaYMax - M_PI;
 		}
-    } else {
+	} else {
 		double invTanTheta = _cosTheta / _sinTheta;
 		if (_sinTheta < 0) {
 			etaXMax = 0.5 * M_PI + atan(invTanTheta / bOnA);
@@ -369,23 +369,23 @@ double safety3[4] = {
 			etaYMax = atan(invTanTheta * bOnA);
 			etaYMin = etaYMax - M_PI;
 		}
-    }
+	}
 	
-    etaXMin -= (2*M_PI) * floor((etaXMin - _eta1) / (2*M_PI));
-    etaYMin -= (2*M_PI) * floor((etaYMin - _eta1) / (2*M_PI));
-    etaXMax -= (2*M_PI) * floor((etaXMax - _eta1) / (2*M_PI));
-    etaYMax -= (2*M_PI) * floor((etaYMax - _eta1) / (2*M_PI));
+	etaXMin -= (2*M_PI) * floor((etaXMin - _eta1) / (2*M_PI));
+	etaYMin -= (2*M_PI) * floor((etaYMin - _eta1) / (2*M_PI));
+	etaXMax -= (2*M_PI) * floor((etaXMax - _eta1) / (2*M_PI));
+	etaYMax -= (2*M_PI) * floor((etaYMax - _eta1) / (2*M_PI));
 	
-    _xLeft = (etaXMin <= _eta2)
+	_xLeft = (etaXMin <= _eta2)
 	? (_cx + _a * cos(etaXMin) * _cosTheta - _b * sin(etaXMin) * _sinTheta)
 	: MIN(_x1, _x2);
-    _yUp = (etaYMin <= _eta2)
+	_yUp = (etaYMin <= _eta2)
 	? (_cy + _a * cos(etaYMin) * _sinTheta + _b * sin(etaYMin) * _cosTheta)
 	: MIN(_y1, _y2);
-    _width = ((etaXMax <= _eta2)
+	_width = ((etaXMax <= _eta2)
 			  ? (_cx + _a * cos(etaXMax) * _cosTheta - _b * sin(etaXMax) * _sinTheta)
 			  : MAX(_x1, _x2)) - _xLeft;
-    _height = ((etaYMax <= _eta2)
+	_height = ((etaYMax <= _eta2)
 			   ? (_cy + _a * cos(etaYMax) * _sinTheta + _b * sin(etaYMax) * _cosTheta)
 			   : MAX(_y1, _y2)) - _yUp;
 }
@@ -393,9 +393,9 @@ double safety3[4] = {
 -(void)computeDerivedFlatnessParameters
 {
 	_f   = (_a - _b) / _a;
-    _e2  = _f * (2.0 - _f);
-    _g   = 1.0 - _f;
-    _g2  = _g * _g;
+	_e2  = _f * (2.0 - _f);
+	_g   = 1.0 - _f;
+	_g2  = _g * _g;
 }
 
 
@@ -412,7 +412,7 @@ double safety3[4] = {
 {
 	double eta  = 0.5 * (etaA + etaB);
 	
-    if (degree < 2)
+	if (degree < 2)
 	{
 		// start point
 		double aCosEtaA  = _a * cos(etaA);
@@ -436,7 +436,7 @@ double safety3[4] = {
 		double dy = yB - yA;
 		
 		return abs(x * dy - y * dx + xB * yA - xA * yB) / sqrt(dx * dx + dy * dy);
-    }
+	}
 	else
 	{
 		double x    = _b / _a;
@@ -467,7 +467,7 @@ double safety3[4] = {
 		c1 += cos6 * [EllipticalArc rationalFunctionWithAbscissa:x coefficients:coeffs[1][3]];
 		
 		return [EllipticalArc rationalFunctionWithAbscissa:x coefficients:safety] * _a * exp(c0 + c1 * dEta);
-    }
+	}
 }
 
 -(CGPoint)pointAtAngle:(double)lambda
@@ -475,13 +475,13 @@ double safety3[4] = {
 	CGPoint p;
 	
 	double eta      = atan2(sin(lambda) / _b, cos(lambda) / _a);
-    double aCosEta  = _a * cos(eta);
-    double bSinEta  = _b * sin(eta);
+	double aCosEta  = _a * cos(eta);
+	double bSinEta  = _b * sin(eta);
 	
-    p.x = _cx + aCosEta * _cosTheta - bSinEta * _sinTheta;
-    p.y = _cy + aCosEta * _sinTheta + bSinEta * _cosTheta;
+	p.x = _cx + aCosEta * _cosTheta - bSinEta * _sinTheta;
+	p.y = _cy + aCosEta * _sinTheta + bSinEta * _cosTheta;
 	
-    return p;
+	return p;
 }
 
 
@@ -490,16 +490,16 @@ double safety3[4] = {
 -(BOOL)containsPoint:(CGPoint)point
 {
 	// position relative to the focii
-    double dx1 = point.x - _xF1;
-    double dy1 = point.y - _yF1;
-    double dx2 = point.x - _xF2;
-    double dy2 = point.y - _yF2;
-    if ((dx1 * dx1 + dy1 * dy1 + dx2 * dx2 + dy2 * dy2) > (4 * _a * _a)) {
+	double dx1 = point.x - _xF1;
+	double dy1 = point.y - _yF1;
+	double dx2 = point.x - _xF2;
+	double dy2 = point.y - _yF2;
+	if ((dx1 * dx1 + dy1 * dy1 + dx2 * dx2 + dy2 * dy2) > (4 * _a * _a)) {
 		// the point is outside of the ellipse
 		return false;
-    }
+	}
 	
-    if (_isPieSlice)
+	if (_isPieSlice)
 	{
 		// check the location of the test point with respect to the
 		// angular sector counted from the center of the ellipse
@@ -510,28 +510,28 @@ double safety3[4] = {
 		double eta = atan2(v / _b, u / _a);
 		eta -= (2*M_PI) * floor((eta - _eta1) / (2*M_PI));
 		return (eta <= _eta2);
-    }
+	}
 	else {
 		// check the location of the test point with respect to the
 		// line joining the start and end points
 		double dx = _x2 - _x1;
 		double dy = _y2 - _y1;
 		return ((point.x * dy - point.y * dx + _x2 * _y1 - _x1 * _y2) >= 0);
-    }
+	}
 }
 
 -(BOOL)containsRectangle:(CGRect)rect
 {
 	double xPlusW = rect.origin.x + rect.size.width;
-    double yPlusH = rect.origin.y + rect.size.height;
-    return ([self containsPoint:rect.origin]
-            && [self containsPoint:CGPointMake(xPlusW, rect.origin.y)]
-            && [self containsPoint:CGPointMake(rect.origin.x, yPlusH)]
-            && [self containsPoint:CGPointMake(xPlusW, yPlusH)]
-            && (![self outlineIntersectLineWithStartPoint:rect.origin endPoint:CGPointMake(xPlusW, rect.origin.y)])
-            && (![self outlineIntersectLineWithStartPoint:CGPointMake(xPlusW, rect.origin.y) endPoint:CGPointMake(xPlusW, yPlusH)])
-            && (![self outlineIntersectLineWithStartPoint:CGPointMake(xPlusW, yPlusH) endPoint:CGPointMake(rect.origin.x, yPlusH)])
-            && (![self outlineIntersectLineWithStartPoint:CGPointMake(rect.origin.x, yPlusH) endPoint:rect.origin]));
+	double yPlusH = rect.origin.y + rect.size.height;
+	return ([self containsPoint:rect.origin]
+			&& [self containsPoint:CGPointMake(xPlusW, rect.origin.y)]
+			&& [self containsPoint:CGPointMake(rect.origin.x, yPlusH)]
+			&& [self containsPoint:CGPointMake(xPlusW, yPlusH)]
+			&& (![self outlineIntersectLineWithStartPoint:rect.origin endPoint:CGPointMake(xPlusW, rect.origin.y)])
+			&& (![self outlineIntersectLineWithStartPoint:CGPointMake(xPlusW, rect.origin.y) endPoint:CGPointMake(xPlusW, yPlusH)])
+			&& (![self outlineIntersectLineWithStartPoint:CGPointMake(xPlusW, yPlusH) endPoint:CGPointMake(rect.origin.x, yPlusH)])
+			&& (![self outlineIntersectLineWithStartPoint:CGPointMake(rect.origin.x, yPlusH) endPoint:rect.origin]));
 }
 
 #pragma mark - intersects
@@ -539,44 +539,44 @@ double safety3[4] = {
 -(BOOL)intersectLineWithStartPoint:(CGPoint)start endPoint:(CGPoint)end
 {
 	double dx = start.x - end.x;
-    double dy = start.y - end.y;
-    double l  = sqrt(dx * dx + dy * dy);
-    if (l < (1.0e-10 * _a)) {
+	double dy = start.y - end.y;
+	double l  = sqrt(dx * dx + dy * dy);
+	if (l < (1.0e-10 * _a)) {
 		// too small line segment, we consider it doesn't intersect anything
 		return false;
-    }
-    double cz = (dx * _cosTheta + dy * _sinTheta) / l;
-    double sz = (dy * _cosTheta - dx * _sinTheta) / l;
+	}
+	double cz = (dx * _cosTheta + dy * _sinTheta) / l;
+	double sz = (dy * _cosTheta - dx * _sinTheta) / l;
 	
-    // express position of the first point in canonical frame
-    dx = start.x - _cx;
-    dy = start.y - _cy;
-    double u = dx * _cosTheta + dy * _sinTheta;
-    double v = dy * _cosTheta - dx * _sinTheta;
+	// express position of the first point in canonical frame
+	dx = start.x - _cx;
+	dy = start.y - _cy;
+	double u = dx * _cosTheta + dy * _sinTheta;
+	double v = dy * _cosTheta - dx * _sinTheta;
 	
-    double u2         = u * u;
-    double v2         = v * v;
-    double g2u2ma2    = _g2 * (u2 - _a * _a);
+	double u2         = u * u;
+	double v2         = v * v;
+	double g2u2ma2    = _g2 * (u2 - _a * _a);
 	//    double g2u2ma2mv2 = g2u2ma2 - v2;
-    double g2u2ma2pv2 = g2u2ma2 + v2;
+	double g2u2ma2pv2 = g2u2ma2 + v2;
 	
-    // compute intersections with the ellipse along the line
-    // as the roots of _a 2nd degree polynom : c0 k^2 - 2 c1 k + c2 = 0
-    double c0   = 1.0 - _e2 * cz * cz;
-    double c1   = _g2 * u * cz + v * sz;
-    double c2   = g2u2ma2pv2;
-    double c12  = c1 * c1;
-    double c0c2 = c0 * c2;
+	// compute intersections with the ellipse along the line
+	// as the roots of _a 2nd degree polynom : c0 k^2 - 2 c1 k + c2 = 0
+	double c0   = 1.0 - _e2 * cz * cz;
+	double c1   = _g2 * u * cz + v * sz;
+	double c2   = g2u2ma2pv2;
+	double c12  = c1 * c1;
+	double c0c2 = c0 * c2;
 	
-    if (c12 < c0c2) {
+	if (c12 < c0c2) {
 		// the line does not intersect the ellipse at all
 		return false;
-    }
+	}
 	
-    double k = (c1 >= 0)
+	double k = (c1 >= 0)
 	? (c1 + sqrt(c12 - c0c2)) / c0
 	: c2 / (c1 - sqrt(c12 - c0c2));
-    if ((k >= 0) && (k <= l)) {
+	if ((k >= 0) && (k <= l)) {
 		double uIntersect = u - k * cz;
 		double vIntersect = v - k * sz;
 		double eta = atan2(vIntersect / _b, uIntersect / _a);
@@ -584,10 +584,10 @@ double safety3[4] = {
 		if (eta <= _eta2) {
 			return true;
 		}
-    }
+	}
 	
-    k = c2 / (k * c0);
-    if ((k >= 0) && (k <= l)) {
+	k = c2 / (k * c0);
+	if ((k >= 0) && (k <= l)) {
 		double uIntersect = u - k * cz;
 		double vIntersect = v - k * sz;
 		double eta = atan2(vIntersect / _b, uIntersect / _a);
@@ -595,9 +595,9 @@ double safety3[4] = {
 		if (eta <= _eta2) {
 			return true;
 		}
-    }
+	}
 	
-    return false;
+	return false;
 }
 
 +(BOOL)lineIntersectLineWithStartPoint1:(CGPoint)start1
@@ -606,22 +606,22 @@ double safety3[4] = {
 							  endPoint2:(CGPoint)end2
 {
 	// elements of the equation of the (1, 2) line segment
-    double dx12 = end1.x - start1.x;
-    double dy12 = end1.y - start1.y;
-    double k12  = end1.x * start1.y - start1.x * end1.y;
+	double dx12 = end1.x - start1.x;
+	double dy12 = end1.y - start1.y;
+	double k12  = end1.x * start1.y - start1.x * end1.y;
 	
-    // elements of the equation of the (A, B) line segment
-    double dxAB = end2.x - start2.x;
-    double dyAB = end2.y - start2.y;
-    double kAB  = end2.x * start2.y - start2.x * end2.y;
+	// elements of the equation of the (A, B) line segment
+	double dxAB = end2.x - start2.x;
+	double dyAB = end2.y - start2.y;
+	double kAB  = end2.x * start2.y - start2.x * end2.y;
 	
-    // compute relative positions of endpoints versus line segments
-    double pAvs12 = start2.x * dy12 - start2.y * dx12 + k12;
-    double pBvs12 = end2.x * dy12 - end2.y * dx12 + k12;
-    double p1vsAB = start1.x * dyAB - start1.y * dxAB + kAB;
-    double p2vsAB = start2.x * dyAB - start2.y * dxAB + kAB;
+	// compute relative positions of endpoints versus line segments
+	double pAvs12 = start2.x * dy12 - start2.y * dx12 + k12;
+	double pBvs12 = end2.x * dy12 - end2.y * dx12 + k12;
+	double p1vsAB = start1.x * dyAB - start1.y * dxAB + kAB;
+	double p2vsAB = start2.x * dyAB - start2.y * dxAB + kAB;
 	
-    return (pAvs12 * pBvs12 <= 0) && (p1vsAB * p2vsAB <= 0);
+	return (pAvs12 * pBvs12 <= 0) && (p1vsAB * p2vsAB <= 0);
 }
 
 -(BOOL)outlineIntersectLineWithStartPoint:(CGPoint)start endPoint:(CGPoint)end
@@ -629,34 +629,34 @@ double safety3[4] = {
 	if ([self intersectLineWithStartPoint:start endPoint:end])
 		return true;
 	
-    if (_isPieSlice)
+	if (_isPieSlice)
 	{
 		return [EllipticalArc lineIntersectLineWithStartPoint1:CGPointMake(_cx, _cy)
 													 endPoint1:CGPointMake(_x1, _y1)
 												   startPoint2:start endPoint2:end]
-			|| [EllipticalArc lineIntersectLineWithStartPoint1:CGPointMake(_cx, _cy)
-													 endPoint1:CGPointMake(_x1, _y1)
-												   startPoint2:start endPoint2:end];
-    }
+		|| [EllipticalArc lineIntersectLineWithStartPoint1:CGPointMake(_cx, _cy)
+												 endPoint1:CGPointMake(_x1, _y1)
+											   startPoint2:start endPoint2:end];
+	}
 	else {
 		return [EllipticalArc lineIntersectLineWithStartPoint1:CGPointMake(_x1, _y1)
 													 endPoint1:CGPointMake(_x2, _y2)
 												   startPoint2:start endPoint2:end];
-    }
+	}
 }
 
 -(BOOL)intersectsRectangle:(CGRect)rect
 {
 	double xPlusW = rect.origin.x + rect.size.width;
-    double yPlusH = rect.origin.y + rect.size.height;
-    return ([self containsPoint:rect.origin]
-            || [self containsPoint:CGPointMake(xPlusW, rect.origin.y)]
-            || [self containsPoint:CGPointMake(rect.origin.x, yPlusH)]
-            || [self containsPoint:CGPointMake(xPlusW, yPlusH)]
-            || (![self outlineIntersectLineWithStartPoint:rect.origin endPoint:CGPointMake(xPlusW, rect.origin.y)])
-            || (![self outlineIntersectLineWithStartPoint:CGPointMake(xPlusW, rect.origin.y) endPoint:CGPointMake(xPlusW, yPlusH)])
-            || (![self outlineIntersectLineWithStartPoint:CGPointMake(xPlusW, yPlusH) endPoint:CGPointMake(rect.origin.x, yPlusH)])
-            || (![self outlineIntersectLineWithStartPoint:CGPointMake(rect.origin.x, yPlusH) endPoint:rect.origin]));
+	double yPlusH = rect.origin.y + rect.size.height;
+	return ([self containsPoint:rect.origin]
+			|| [self containsPoint:CGPointMake(xPlusW, rect.origin.y)]
+			|| [self containsPoint:CGPointMake(rect.origin.x, yPlusH)]
+			|| [self containsPoint:CGPointMake(xPlusW, yPlusH)]
+			|| (![self outlineIntersectLineWithStartPoint:rect.origin endPoint:CGPointMake(xPlusW, rect.origin.y)])
+			|| (![self outlineIntersectLineWithStartPoint:CGPointMake(xPlusW, rect.origin.y) endPoint:CGPointMake(xPlusW, yPlusH)])
+			|| (![self outlineIntersectLineWithStartPoint:CGPointMake(xPlusW, yPlusH) endPoint:CGPointMake(rect.origin.x, yPlusH)])
+			|| (![self outlineIntersectLineWithStartPoint:CGPointMake(rect.origin.x, yPlusH) endPoint:rect.origin]));
 }
 
 
@@ -672,9 +672,9 @@ double safety3[4] = {
 					tranformation:(CGAffineTransform *)m
 {
 	// find the number of Bézier curves needed
-    BOOL found = NO;
-    int n = 1;
-    while ((!found) && (n < 1024))
+	BOOL found = NO;
+	int n = 1;
+	while ((!found) && (n < 1024))
 	{
 		double dEta = (_eta2 - _eta1) / n;
 		if (dEta <= 0.5 * M_PI)
@@ -689,36 +689,36 @@ double safety3[4] = {
 			}
 		}
 		n = n << 1;
-    }
+	}
 	
-    CGMutablePathRef path = CGPathCreateMutable();
-    double dEta = (_eta2 - _eta1) / n;
-    double etaB = _eta1;
+	CGMutablePathRef path = CGPathCreateMutable();
+	double dEta = (_eta2 - _eta1) / n;
+	double etaB = _eta1;
 	
-    double cosEtaB  = cos(etaB);
-    double sinEtaB  = sin(etaB);
-    double aCosEtaB = _a * cosEtaB;
-    double bSinEtaB = _b * sinEtaB;
-    double aSinEtaB = _a * sinEtaB;
-    double bCosEtaB = _b * cosEtaB;
-    double xB       = _cx + aCosEtaB * _cosTheta - bSinEtaB * _sinTheta;
-    double yB       = _cy + aCosEtaB * _sinTheta + bSinEtaB * _cosTheta;
-    double xBDot    = -aSinEtaB * _cosTheta - bCosEtaB * _sinTheta;
-    double yBDot    = -aSinEtaB * _sinTheta + bCosEtaB * _cosTheta;
+	double cosEtaB  = cos(etaB);
+	double sinEtaB  = sin(etaB);
+	double aCosEtaB = _a * cosEtaB;
+	double bSinEtaB = _b * sinEtaB;
+	double aSinEtaB = _a * sinEtaB;
+	double bCosEtaB = _b * cosEtaB;
+	double xB       = _cx + aCosEtaB * _cosTheta - bSinEtaB * _sinTheta;
+	double yB       = _cy + aCosEtaB * _sinTheta + bSinEtaB * _cosTheta;
+	double xBDot    = -aSinEtaB * _cosTheta - bCosEtaB * _sinTheta;
+	double yBDot    = -aSinEtaB * _sinTheta + bCosEtaB * _cosTheta;
 	
-    if (_isPieSlice)
+	if (_isPieSlice)
 	{
 		CGPathMoveToPoint(path, NULL, _cx, _cy);
 		CGPathAddLineToPoint(path, NULL, xB, yB);
-    }
+	}
 	else CGPathMoveToPoint(path, NULL, xB, yB);
 	
-    double t     = tan(0.5 * dEta);
-    double alpha = sin(dEta) * (sqrt(4 + 3 * t * t) - 1) / 3;
+	double t     = tan(0.5 * dEta);
+	double alpha = sin(dEta) * (sqrt(4 + 3 * t * t) - 1) / 3;
 	
-    for (int i = 0; i < n; ++i)
+	for (int i = 0; i < n; ++i)
 	{
-//		double etaA  = etaB;
+		//		double etaA  = etaB;
 		double xA    = xB;
 		double yA    = yB;
 		double xADot = xBDot;
@@ -748,12 +748,12 @@ double safety3[4] = {
 		else {
 			CGPathAddCurveToPoint(path, NULL, (xA + alpha * xADot), (yA + alpha * yADot), (xB - alpha * xBDot), (yB - alpha * yBDot), xB, yB);
 		}
-    }
+	}
 	
-    if (_isPieSlice)
+	if (_isPieSlice)
 	{
 		CGPathCloseSubpath(path);
-    }
+	}
 	
 	CGMutablePathRef returnPath = CGPathCreateMutableCopyByTransformingPath(path, m);
 	CGPathRelease(path);
