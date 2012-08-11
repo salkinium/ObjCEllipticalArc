@@ -34,7 +34,7 @@
 // USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 //
-// Ported to Objective-C for CoreGraphics on 21. August 2012 by Niklas Hauser
+// Ported to Objective-C for CoreGraphics on 12. August 2012 by Niklas Hauser
 
 #import "EllipticalArc.h"
 
