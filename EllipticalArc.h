@@ -62,59 +62,6 @@
  * @author Niklas Hauser
  */
 @interface EllipticalArc : NSObject
-{
-	/** Abscissa of the center of the ellipse. */
-	double _cx;
-	/** Ordinate of the center of the ellipse. */
-	double _cy;
-	/** Semi-major axis. */
-	double _a;
-	/** Semi-minor axis. */
-	double _b;
-	/** Orientation of the major axis with respect to the x axis. */
-	double _theta;
-	double _cosTheta;
-	double _sinTheta;
-	/** Start angle of the arc. */
-	double _eta1;
-	/** End angle of the arc. */
-	double _eta2;
-	/** Abscissa of the start point. */
-	double _x1;
-	/** Ordinate of the start point. */
-	double _y1;
-	/** Abscissa of the end point. */
-	double _x2;
-	/** Ordinate of the end point. */
-	double _y2;
-	/** Abscissa of the first focus. */
-	double _xF1;
-	/** Ordinate of the first focus. */
-	double _yF1;
-	/** Abscissa of the second focus. */
-	double _xF2;
-	/** Ordinate of the second focus. */
-	double _yF2;
-	/** Abscissa of the leftmost point of the arc. */
-	double _xLeft;
-	/** Ordinate of the highest point of the arc. */
-	double _yUp;
-	/** Horizontal width of the arc. */
-	double _width;
-	/** Vertical height of the arc. */
-	double _height;
-	/** Indicator for center to endpoints line inclusion. */
-	BOOL _isPieSlice;
-	/** Maximal degree for Bézier curve approximation. */
-	int _maxDegree;
-	/** Default flatness for Bézier curve approximation. */
-	double _defaultFlatness;
-	
-	double _f;
-	double _e2;
-	double _g;
-	double _g2;
-}
 
 /** Simple constructor.
  * Build an elliptical arc composed of the full unit circle centered
